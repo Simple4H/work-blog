@@ -153,4 +153,12 @@
         update xj_article set update_time = now()
         where id=#{id}
     </update>
+
+    <update id="iLikeIt" parameterType="int">
+        update xj_article set like_article = like_article + 1 where id = #{articleId}
+    </update>
+
+    <update id="idontLikeIt" parameterType="int">
+        update xj_article set like_article = like_article - 1 where id = #{articleId}
+    </update>
 </mapper>

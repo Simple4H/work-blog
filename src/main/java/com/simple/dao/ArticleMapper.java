@@ -24,4 +24,8 @@ public interface ArticleMapper {
     List<Article> searchByKeyWord(String keyWord);
 
     int updateUserUpdateArticleTime(Integer id);
+
+    int iLikeIt(Integer articleId);
+
+    int idontLikeIt(Integer articleId);
 }

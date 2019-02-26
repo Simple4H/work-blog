@@ -3,6 +3,7 @@ package com.simple.service;
 
 import com.simple.common.ServerResponse;
 import com.simple.pojo.User;
+import com.simple.pojo.UserItem;
 
 /**
  * @Author: Simple4H
@@ -15,4 +16,6 @@ public interface IUserService {
     ServerResponse register(User user);
 
     ServerResponse updateUserInfo(User user);
+
+    ServerResponse userLikeIt(UserItem userItem);
 }

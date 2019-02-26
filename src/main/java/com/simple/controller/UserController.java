@@ -3,6 +3,7 @@ package com.simple.controller;
 import com.simple.common.Const;
 import com.simple.common.ServerResponse;
 import com.simple.pojo.User;
+import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,6 +79,19 @@ public class UserController {
         }
         session.removeAttribute(Const.ROLE.CURRENT_USER);
         return ServerResponse.createBySuccessMessage("logout success");
+    }
+
+    // 点赞博客
+    @RequestMapping(value = "user_like_it.do", method = RequestMethod.POST)
+    public ServerResponse userLikeIt(HttpSession session, Integer articleId) {
+        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
+        if (sessionUser == null) {
+            return ServerResponse.createErrorByNeedLogin();
+        }
+        UserItem userItem = new UserItem();
+        userItem.setUserId(sessionUser.getId());
+        userItem.setArticleId(articleId);
+        return iUserService.userLikeIt(userItem);
     }
 
     // 用户获取自己点赞的文章列表

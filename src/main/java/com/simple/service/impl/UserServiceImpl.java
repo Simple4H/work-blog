@@ -2,8 +2,11 @@ package com.simple.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.simple.common.ServerResponse;
+import com.simple.dao.ArticleMapper;
+import com.simple.dao.UserItemMapper;
 import com.simple.dao.UserMapper;
 import com.simple.pojo.User;
+import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +18,18 @@ import org.springframework.stereotype.Service;
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {
 
+    private final ArticleMapper articleMapper;
+
+    private final UserMapper userMapper;
+
+    private final UserItemMapper userItemMapper;
+
     @Autowired
-    private UserMapper userMapper;
+    public UserServiceImpl(UserMapper userMapper, UserItemMapper userItemMapper, ArticleMapper articleMapper) {
+        this.userMapper = userMapper;
+        this.userItemMapper = userItemMapper;
+        this.articleMapper = articleMapper;
+    }
 
     public ServerResponse login(String username, String password) {
         int checkUsername = userMapper.checkUsername(username);
@@ -53,6 +66,30 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("update user info error");
     }
 
+    // TODO: 2019-02-26 判断博客是否存在 
+    public ServerResponse userLikeIt(UserItem userItem) {
+        // 判断是否已经点赞过该博客
+        Integer checkResult = userItemMapper.checkUserIsLikeItBefore(userItem.getUserId(), userItem.getArticleId());
+        if (checkResult != null) {
+            // 如果已经点赞过则直接取消喜欢
+            int result = userItemMapper.deleteByUserIdAndArticleId(userItem.getUserId(), userItem.getArticleId());
+            if (result > 0) {
+                // 博客点赞数-1
+                articleMapper.idontLikeIt(userItem.getArticleId());
+                return ServerResponse.createBySuccessMessage("unlike success");
+            }
+            return ServerResponse.createByErrorMessage("have a error!!!!");
+        }
+        // 没有点赞过
+        if (userItemMapper.insert(userItem) > 0) {
+            //点赞数+1
+            articleMapper.iLikeIt(userItem.getArticleId());
+            return ServerResponse.createBySuccessMessage("you like it success");
+        }
+        return ServerResponse.createByErrorMessage("some thing error!!!!");
+    }
+
+    // TODO: 2019-02-26 获取点赞的列表
     public ServerResponse<PageInfo> getUserMyLike(Integer userId) {
         return null;
     }
