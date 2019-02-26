@@ -21,5 +21,7 @@ public interface ArticleMapper {
 
     List<Article> searchByTags(String tags);
 
+    List<Article> searchByKeyWord(String keyWord);
+
     int updateUserUpdateArticleTime(Integer id);
 }

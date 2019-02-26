@@ -13,6 +13,8 @@ public interface IArticleService {
 
     ServerResponse getArticleByTags(String tags, int pageNum, int pageSize);
 
+    ServerResponse searchByKeyWord(String keyWord, int pageNum, int pageSize);
+
     ServerResponse userCreateNewArticle(Article article);
 
     ServerResponse userUpdateArticle(Article article);

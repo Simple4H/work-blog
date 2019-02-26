@@ -41,7 +41,15 @@ public class ArticleServiceImpl implements IArticleService {
             return ServerResponse.createBySuccess("search success", lists);
         }
         return ServerResponse.createByErrorMessage("nothing!!!!!");
+    }
 
+    public ServerResponse searchByKeyWord(String keyWord, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Article> lists = articleMapper.searchByKeyWord(keyWord);
+        if (!lists.isEmpty()) {
+            return ServerResponse.createBySuccess("search success", lists);
+        }
+        return ServerResponse.createByErrorMessage("nothing!!!");
     }
 
     public ServerResponse userCreateNewArticle(Article article) {

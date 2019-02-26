@@ -139,6 +139,16 @@
         from xj_article where tags = #{tags}
     </select>
 
+    <select id="searchByKeyWord" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List"/>
+        from xj_article
+        where
+        title LIKE CONCAT('%',#{keyWord} ,'%')
+        or
+        content LIKE CONCAT('%',#{keyWord} ,'%')
+    </select>
+
     <update id="updateUserUpdateArticleTime" parameterType="int">
         update xj_article set update_time = now()
         where id=#{id}

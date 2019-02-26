@@ -41,6 +41,13 @@ public class ArticleController {
 
     }
 
+    // 通过关键字查找博客
+    @RequestMapping(value = "search_by_keyword.do", method = RequestMethod.POST)
+    public ServerResponse searchByTitle(String keyWord, int pageNum, int pageSize) {
+        return iArticleService.searchByKeyWord(keyWord, pageNum, pageSize);
+
+    }
+
     // 用户新建博客
     @RequestMapping(value = "user_create_new_article.do", method = RequestMethod.POST)
     public ServerResponse userCreateNewArticle(HttpSession session, Article article) {
@@ -63,7 +70,5 @@ public class ArticleController {
             return iArticleService.userUpdateArticle(article);
         }
         return ServerResponse.createByErrorMessage("you are not author, you can't update this article!!!");
-
-
     }
 }

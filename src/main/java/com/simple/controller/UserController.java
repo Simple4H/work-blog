@@ -4,7 +4,6 @@ import com.simple.common.Const;
 import com.simple.common.ServerResponse;
 import com.simple.pojo.User;
 import com.simple.service.IUserService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
