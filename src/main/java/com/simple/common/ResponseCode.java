@@ -1,7 +1,8 @@
 package com.simple.common;
 
 /**
- * Create by S I M P L E on 2018/03/30 00:02:08
+ * @Author: Simple4H
+ * @Date: 2019/02/26 09:27:11
  */
 public enum  ResponseCode {
     SUCCESS(0, "SUCCESS"),
