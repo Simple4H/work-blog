@@ -1,0 +1,22 @@
+用户模块("/user/")
+	登录login.do(username,password)
+	注册register.do(username,password,email)
+	更新用户数据update.do(username,password,email)
+	我的点赞my_like.do(article_id)
+	取消的我点赞undo_my_like(article_id)
+
+文章模块("/article/")
+	未登录
+		获取所有文章列表get_all_article_list.do()
+		获取类型()
+		通过类型获取文章列表get_article_by_tags.do(tags)
+		查找文章
+			标题查找search_by_title.do()
+			内容查找search_by_context.do
+	登录
+		添加文章add.do(username)
+		删除文章delete.do(id,username)
+		修改文章update.do(id,title,context)
+		点赞文章like_it.do(+1)
+		取消点赞undo_like_it(-1)
+
