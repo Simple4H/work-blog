@@ -18,4 +18,8 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<Article> getAllArticleList();
+
+    List<Article> searchByTags(String tags);
+
+    int updateUserUpdateArticleTime(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.simple.service;
 
 import com.simple.common.ServerResponse;
+import com.simple.pojo.Article;
 
 /**
  * @Author: Simple4H
@@ -8,5 +9,11 @@ import com.simple.common.ServerResponse;
  */
 public interface IArticleService {
 
-    ServerResponse getAllArticleList();
+    ServerResponse getAllArticleList(int pageNum, int pageSize);
+
+    ServerResponse getArticleByTags(String tags, int pageNum, int pageSize);
+
+    ServerResponse userCreateNewArticle(Article article);
+
+    ServerResponse userUpdateArticle(Article article);
 }
