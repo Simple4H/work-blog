@@ -91,7 +91,7 @@
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = now(),
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -111,4 +111,21 @@
         <include refid="Base_Column_List"/>
         from xj_user where username=#{username} and password =#{password}
     </select>
+
+    <select id="checkUsername" parameterType="string" resultType="int">
+        select count(1)
+        from xj_user where username=#{username}
+    </select>
+
+    <select id="checkPassword" parameterType="string" resultType="int">
+        select count(1)
+        from xj_user where password=#{password}
+    </select>
+
+    <update id="updateUserUpdateTime" parameterType="int">
+        update
+        xj_user
+        set update_time=now()
+        where id=#{id}
+    </update>
 </mapper>

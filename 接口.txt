@@ -3,6 +3,7 @@
 	注册register.do(username,password,email)
 	更新用户数据update.do(username,password,email)
 	获取用户登陆信息
+
 	我的点赞my_like.do(article_id)
 	取消的我点赞undo_my_like(article_id)
 
