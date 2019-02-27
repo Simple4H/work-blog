@@ -165,4 +165,24 @@
     <delete id="deleteArticleByUserIdAndId" parameterType="int">
         delete from xj_article where id=#{articleId}  and user_id=#{userId}
     </delete>
+
+    <insert id="insertNewArticle" parameterType="map">
+        insert into xj_article values
+        (null ,user_id=#{userId} ,title=#{title} ,content=#{content} ,tags=#{tags} ,0,now(),now())
+    </insert>
+
+    <update id="updateArticle" parameterType="map">
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="tags != null">
+                tags =#{tags},
+            </if>
+        </set>
+        where id = #{articleId}
+    </update>
 </mapper>

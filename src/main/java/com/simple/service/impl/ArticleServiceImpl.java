@@ -4,6 +4,8 @@ package com.simple.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.simple.common.ServerResponse;
 import com.simple.dao.ArticleMapper;
+import com.simple.dto.ArticleDto.CreateArticleRequestDto;
+import com.simple.dto.ArticleDto.UpdateArticleRequestDto;
 import com.simple.pojo.Article;
 import com.simple.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,23 +55,28 @@ public class ArticleServiceImpl implements IArticleService {
         return ServerResponse.createByErrorMessage("nothing!!!");
     }
 
-    public ServerResponse userCreateNewArticle(Article article) {
-        int result = articleMapper.insert(article);
+    public ServerResponse userCreateNewArticle(CreateArticleRequestDto requestDto) {
+        int result = articleMapper.insertNewArticle(requestDto.getUserId(), requestDto.getTitle(), requestDto.getContent(), requestDto.getTag());
         if (result > 0) {
             return ServerResponse.createBySuccessMessage("create new article success");
         }
         return ServerResponse.createByErrorMessage("create new article fail!!!");
     }
 
-    public ServerResponse userUpdateArticle(Article article) {
-        int result = articleMapper.updateByPrimaryKeySelective(article);
+    public ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto) {
+//        int result = articleMapper.updateByPrimaryKeySelective(article);
+//        if (result > 0) {
+//            if (articleMapper.updateUserUpdateArticleTime(article.getId()) > 0) {
+//                return ServerResponse.createBySuccessMessage("update article success");
+//            }
+//            return ServerResponse.createByErrorMessage("some error in update UPDATE_TIME");
+//        }
+//        return ServerResponse.createByErrorMessage("update article fail!!!");
+        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(), requestDto.getArticleId());
         if (result > 0) {
-            if (articleMapper.updateUserUpdateArticleTime(article.getId()) > 0) {
-                return ServerResponse.createBySuccessMessage("update article success");
-            }
-            return ServerResponse.createByErrorMessage("some error in update UPDATE_TIME");
+            return ServerResponse.createBySuccessMessage("update success");
         }
-        return ServerResponse.createByErrorMessage("update article fail!!!");
+        return ServerResponse.createByErrorMessage("update error");
     }
 
     public ServerResponse deleteArticle(Integer userId, Integer articleId) {
