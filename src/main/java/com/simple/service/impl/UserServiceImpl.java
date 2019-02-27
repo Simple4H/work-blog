@@ -1,7 +1,6 @@
 package com.simple.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.simple.common.ServerResponse;
 import com.simple.dao.ArticleMapper;
 import com.simple.dao.UserItemMapper;
