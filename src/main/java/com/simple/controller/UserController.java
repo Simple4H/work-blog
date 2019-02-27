@@ -74,24 +74,11 @@ public class UserController {
         return iUserService.updateUserInfo(requestDto,id);
     }
 
-    // 点赞博客
-    @ApiOperation(value = "点赞博客")
-    @RequestMapping(value = "/user_like_it.do", method = RequestMethod.POST)
-    public ServerResponse userLikeIt(HttpSession session,
-                                     @ApiParam(name = "articleId", value = "文章ID", required = true) @RequestParam Integer articleId) {
-        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
-        if (sessionUser == null) {
-            return ServerResponse.createErrorByNeedLogin();
-        }
-        UserItem userItem = new UserItem();
-        userItem.setUserId(sessionUser.getId());
-        userItem.setArticleId(articleId);
-        return iUserService.userLikeIt(userItem);
-    }
+
 
     // 用户获取自己点赞的文章列表
-    @ApiOperation(value = "用户获取自己点赞的文章列表")
-    @RequestMapping(value = "/get_user_my_like.do", method = RequestMethod.POST)
+    @ApiOperation(value = "用户获取自己点赞的文章列表",httpMethod = "GET")
+    @GetMapping(value = "/likeList")
     public ServerResponse getUserMyLike(HttpSession session,
                                         @ApiParam(name = "pageNum", value = "页码", required = true) @RequestParam int pageNum,
                                         @ApiParam(name = "pageSize", value = "页数", required = true) @RequestParam int pageSize) {
