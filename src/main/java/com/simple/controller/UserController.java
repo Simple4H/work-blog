@@ -96,6 +96,7 @@ public class UserController {
     }
 
     // 用户获取自己点赞的文章列表
+    // TODO: 2019-02-26 考虑封装一个VO
     @RequestMapping(value = "get_user_my_like.do", method = RequestMethod.POST)
     public ServerResponse getUserMyLike(HttpSession session) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
