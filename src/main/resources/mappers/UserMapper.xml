@@ -128,4 +128,17 @@
         set update_time=now()
         where id=#{id}
     </update>
+
+    <insert id="createNewUser" parameterType="string">
+        insert into xj_user values
+        (
+        null ,#{username} ,#{password} ,#{email} ,now() , now()
+        )
+    </insert>
+
+    <update id="updateUserInfo" parameterType="map">
+        update xj_user
+        set username=#{username} ,password=#{password} ,email=#{email},update_time=now()
+        where id = #{userId}
+    </update>
 </mapper>

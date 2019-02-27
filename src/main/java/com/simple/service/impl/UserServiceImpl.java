@@ -5,6 +5,8 @@ import com.simple.common.ServerResponse;
 import com.simple.dao.ArticleMapper;
 import com.simple.dao.UserItemMapper;
 import com.simple.dao.UserMapper;
+import com.simple.dto.UserDto.CreateUserRequestDto;
+import com.simple.dto.UserDto.UpdateUserRequestDto;
 import com.simple.pojo.User;
 import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
@@ -49,23 +51,28 @@ public class UserServiceImpl implements IUserService {
 
     }
 
-    public ServerResponse register(User user) {
-        int result = userMapper.insert(user);
+    public ServerResponse register(CreateUserRequestDto requestDto) {
+        int result = userMapper.createNewUser(requestDto.getUsername(), requestDto.getPassword(), requestDto.getEmail());
         if (result > 0) {
             return ServerResponse.createBySuccessMessage("register Success");
         }
         return ServerResponse.createByErrorMessage("register error");
     }
 
-    public ServerResponse updateUserInfo(User user) {
-        int result = userMapper.updateByPrimaryKeySelective(user);
+    public ServerResponse updateUserInfo(CreateUserRequestDto requestDto, Integer userId) {
+//        int result = userMapper.updateByPrimaryKeySelective(user);
+//        if (result > 0) {
+//            if (userMapper.updateUserUpdateTime(user.getId()) > 0) {
+//                return ServerResponse.createBySuccessMessage("update user info success");
+//            }
+//            return ServerResponse.createByErrorMessage("some thing error in update user update time!");
+//        }
+//        return ServerResponse.createByErrorMessage("update user info error");
+        int result = userMapper.updateUserInfo(userId, requestDto.getUsername(), requestDto.getPassword(), requestDto.getEmail());
         if (result > 0) {
-            if (userMapper.updateUserUpdateTime(user.getId()) > 0) {
-                return ServerResponse.createBySuccessMessage("update user info success");
-            }
-            return ServerResponse.createByErrorMessage("some thing error in update user update time!");
+            return ServerResponse.createBySuccessMessage("update success");
         }
-        return ServerResponse.createByErrorMessage("update user info error");
+        return ServerResponse.createByErrorMessage("update error!!!!!");
     }
 
     // TODO: 2019-02-26 判断博客是否存在 

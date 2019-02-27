@@ -2,7 +2,8 @@ package com.simple.service;
 
 
 import com.simple.common.ServerResponse;
-import com.simple.pojo.User;
+import com.simple.dto.UserDto.CreateUserRequestDto;
+import com.simple.dto.UserDto.UpdateUserRequestDto;
 import com.simple.pojo.UserItem;
 
 /**
@@ -13,9 +14,9 @@ public interface IUserService {
 
     ServerResponse login(String username, String password);
 
-    ServerResponse register(User user);
+    ServerResponse register(CreateUserRequestDto requestDto);
 
-    ServerResponse updateUserInfo(User user);
+    ServerResponse updateUserInfo(CreateUserRequestDto requestDto, Integer userId);
 
     ServerResponse userLikeIt(UserItem userItem);
 

@@ -63,7 +63,7 @@ public class ArticleServiceImpl implements IArticleService {
         return ServerResponse.createByErrorMessage("create new article fail!!!");
     }
 
-    public ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto) {
+    public ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto,Integer articleId) {
 //        int result = articleMapper.updateByPrimaryKeySelective(article);
 //        if (result > 0) {
 //            if (articleMapper.updateUserUpdateArticleTime(article.getId()) > 0) {
@@ -72,7 +72,7 @@ public class ArticleServiceImpl implements IArticleService {
 //            return ServerResponse.createByErrorMessage("some error in update UPDATE_TIME");
 //        }
 //        return ServerResponse.createByErrorMessage("update article fail!!!");
-        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(), requestDto.getArticleId());
+        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(),requestDto.getUserId(),articleId);
         if (result > 0) {
             return ServerResponse.createBySuccessMessage("update success");
         }

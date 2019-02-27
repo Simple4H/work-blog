@@ -23,4 +23,8 @@ public interface UserMapper {
     int checkPassword(String password);
 
     int updateUserUpdateTime(Integer id);
+
+    int createNewUser(@Param("username") String username, @Param("password") String password, @Param("email") String email);
+
+    int updateUserInfo(@Param("userId") Integer userId,@Param("username") String username, @Param("password") String password, @Param("email") String email);
 }

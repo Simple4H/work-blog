@@ -19,7 +19,7 @@ public interface IArticleService {
 
     ServerResponse userCreateNewArticle(CreateArticleRequestDto requestDto);
 
-    ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto);
+    ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto, Integer articleId);
 
     ServerResponse deleteArticle(Integer userId, Integer articleId);
 

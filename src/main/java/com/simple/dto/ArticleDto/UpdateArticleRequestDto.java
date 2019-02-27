@@ -15,9 +15,6 @@ public class UpdateArticleRequestDto {
     @ApiModelProperty(value = "用户id")
     private Integer userId;
 
-    @ApiModelProperty(value = "文章id")
-    private Integer articleId;
-
     @ApiModelProperty(value = "标题")
     private String title;
 

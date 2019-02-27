@@ -172,17 +172,6 @@
     </insert>
 
     <update id="updateArticle" parameterType="map">
-        <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="content != null">
-                content = #{content},
-            </if>
-            <if test="tags != null">
-                tags =#{tags},
-            </if>
-        </set>
-        where id = #{articleId}
+        update xj_article set title=#{title} ,content=#{content} ,tags=#{tags} where user_id=#{userId} and id=#{articleId}
     </update>
 </mapper>
