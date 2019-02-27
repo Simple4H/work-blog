@@ -39,7 +39,14 @@ public class CommentServiceImpl implements ICommentService {
             return ServerResponse.createBySuccessMessage("this article not comment");
         }
         return ServerResponse.createBySuccess("get success", lists);
+    }
 
+    public ServerResponse deleteComment(Integer commentId, Integer userId) {
+        int result = commentMapper.deleteCommentByIdAndUserId(commentId, userId);
+        if (result > 0) {
+            return ServerResponse.createBySuccessMessage("删除评论成功");
+        }
+        return ServerResponse.createByErrorMessage("删除评论失败");
     }
 
 }

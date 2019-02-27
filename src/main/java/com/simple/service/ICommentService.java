@@ -12,4 +12,6 @@ public interface ICommentService {
     ServerResponse addNewComment(Comment comment);
 
     ServerResponse getCommentByArticle(Integer articleId, int pageNum, int pageSize);
+
+    ServerResponse deleteComment(Integer commentId, Integer userId);
 }

@@ -98,4 +98,8 @@
         <include refid="Base_Column_List"/>
         from xj_comment where article_id = #{articleId}
     </select>
+
+    <delete id="deleteCommentByIdAndUserId" parameterType="int">
+        delete from xj_comment where id=#{id} and user_id={userId}
+    </delete>
 </mapper>

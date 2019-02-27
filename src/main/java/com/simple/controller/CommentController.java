@@ -41,12 +41,18 @@ public class CommentController {
         return iCommentService.addNewComment(comment1);
     }
 
-    @RequestMapping(value = "get_comment_by_articleId.do",method = RequestMethod.POST)
-        public ServerResponse getCommentByArticleId(Integer articleId, HttpSession session, int pageNum, int pageSize) {
-//        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
-//        if (sessionUser == null) {
-//            return ServerResponse.createErrorByNeedLogin();
-//        }
+    @RequestMapping(value = "get_comment_by_articleId.do", method = RequestMethod.POST)
+    public ServerResponse getCommentByArticleId(Integer articleId, int pageNum, int pageSize) {
         return iCommentService.getCommentByArticle(articleId, pageNum, pageSize);
+    }
+
+    @RequestMapping(value = "delete_comment.do", method = RequestMethod.POST)
+    public ServerResponse deleteComment(HttpSession session, Integer commentId) {
+        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
+        if (sessionUser == null) {
+            return ServerResponse.createErrorByNeedLogin();
+        }
+        return iCommentService.deleteComment(commentId, sessionUser.getId());
+
     }
 }
