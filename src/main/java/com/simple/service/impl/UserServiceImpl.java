@@ -92,7 +92,6 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("some thing error!!!!");
     }
 
-    // TODO: 2019-02-26 获取点赞的列表
     public ServerResponse getUserMyLike(Integer userId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<UserItem> lists = userItemMapper.getUserItemByUserId(userId);
