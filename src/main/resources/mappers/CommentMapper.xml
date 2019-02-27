@@ -100,6 +100,6 @@
     </select>
 
     <delete id="deleteCommentByIdAndUserId" parameterType="int">
-        delete from xj_comment where id=#{id} and user_id={userId}
+        delete from xj_comment where id=#{id} and user_id=#{userId}
     </delete>
 </mapper>

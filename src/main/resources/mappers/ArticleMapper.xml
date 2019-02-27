@@ -161,4 +161,8 @@
     <update id="idontLikeIt" parameterType="int">
         update xj_article set like_article = like_article - 1 where id = #{articleId}
     </update>
+
+    <delete id="deleteArticleByUserIdAndId" parameterType="int">
+        delete from xj_article where id=#{articleId}  and user_id=#{userId}
+    </delete>
 </mapper>

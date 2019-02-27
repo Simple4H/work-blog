@@ -1,6 +1,7 @@
 package com.simple.dao;
 
 import com.simple.pojo.Article;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface ArticleMapper {
     int iLikeIt(Integer articleId);
 
     int idontLikeIt(Integer articleId);
+
+    int deleteArticleByUserIdAndId(@Param("userId")Integer userId,@Param("articleId")Integer articleId);
 }

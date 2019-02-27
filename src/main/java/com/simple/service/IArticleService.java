@@ -18,4 +18,6 @@ public interface IArticleService {
     ServerResponse userCreateNewArticle(Article article);
 
     ServerResponse userUpdateArticle(Article article);
+
+    ServerResponse deleteArticle(Integer userId, Integer articleId);
 }

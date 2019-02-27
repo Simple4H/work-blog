@@ -3,6 +3,8 @@ package com.simple.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -10,12 +12,16 @@ import java.io.Serializable;
  * @Author: Simple4H
  * @Date: 2019/02/26 09:27:11
  */
+@ApiModel(value = "ServerResponse对象", description = "通用返回对象")
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 //保证序列化json的时候,如果是null的对象,key也会消失
 public class ServerResponse<T> implements Serializable {
 
+    @ApiModelProperty(value = "状态", name = "status", example = "0成功，1失败")
     private int status;
+    @ApiModelProperty(value = "消息", name = "msg")
     private String msg;
+    @ApiModelProperty(value = "数据", name = "data")
     private T data;
 
     private ServerResponse(int status) {

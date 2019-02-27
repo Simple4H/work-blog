@@ -71,5 +71,11 @@ public class ArticleServiceImpl implements IArticleService {
         return ServerResponse.createByErrorMessage("update article fail!!!");
     }
 
-
+    public ServerResponse deleteArticle(Integer userId, Integer articleId) {
+        int result = articleMapper.deleteArticleByUserIdAndId(userId, articleId);
+        if (result > 0) {
+            return ServerResponse.createBySuccessMessage("delete success");
+        }
+        return ServerResponse.createByErrorMessage("you are not author,so you can not delete this article!!!");
+    }
 }
