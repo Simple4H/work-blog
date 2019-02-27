@@ -2,6 +2,8 @@ package com.simple.dao;
 
 import com.simple.pojo.Comment;
 
+import java.util.List;
+
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    List<Comment> getCommentByArticleId(Integer articleId);
 }
