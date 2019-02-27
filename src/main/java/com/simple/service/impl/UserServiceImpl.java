@@ -1,5 +1,6 @@
 package com.simple.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.simple.common.ServerResponse;
 import com.simple.dao.ArticleMapper;
@@ -10,6 +11,8 @@ import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: Simple4H
@@ -90,8 +93,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     // TODO: 2019-02-26 获取点赞的列表
-    public ServerResponse<PageInfo> getUserMyLike(Integer userId) {
-        return null;
+    public ServerResponse getUserMyLike(Integer userId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<UserItem> lists = userItemMapper.getUserItemByUserId(userId);
+        if (lists.isEmpty()) {
+            return ServerResponse.createByErrorMessage("You don't have any likes!");
+        }
+        return ServerResponse.createBySuccess("success", lists);
     }
 
 }

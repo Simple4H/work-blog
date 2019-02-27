@@ -18,4 +18,6 @@ public interface IUserService {
     ServerResponse updateUserInfo(User user);
 
     ServerResponse userLikeIt(UserItem userItem);
+
+    ServerResponse getUserMyLike(Integer userId, int pageNum, int pageSize);
 }

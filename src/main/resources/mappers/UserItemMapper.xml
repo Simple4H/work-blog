@@ -84,4 +84,10 @@
         and
         article_id=#{articleId}
     </delete>
+
+    <select id="getUserItemByUserId" resultMap="BaseResultMap" parameterType="int">
+        select
+        <include refid="Base_Column_List"/>
+        from xj_user_item where user_id=#{userId}
+    </select>
 </mapper>
