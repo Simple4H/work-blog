@@ -12,8 +12,8 @@ import lombok.Data;
 @ApiModel
 public class UpdateArticleRequestDto {
 
-    @ApiModelProperty(value = "用户id")
-    private Integer userId;
+    @ApiModelProperty(value = "博客id")
+    private Integer articleId;
 
     @ApiModelProperty(value = "标题")
     private String title;

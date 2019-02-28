@@ -13,9 +13,6 @@ import lombok.Data;
 @ApiModel
 public class CreateArticleRequestDto {
 
-    @ApiModelProperty(value = "用户Id")
-    private Integer userId;
-
     @ApiModelProperty(value = "标题")
     private String title;
 

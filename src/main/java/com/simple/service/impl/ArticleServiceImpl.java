@@ -55,28 +55,33 @@ public class ArticleServiceImpl implements IArticleService {
         return ServerResponse.createByErrorMessage("nothing!!!");
     }
 
-    public ServerResponse userCreateNewArticle(CreateArticleRequestDto requestDto) {
-        int result = articleMapper.insertNewArticle(requestDto.getUserId(), requestDto.getTitle(), requestDto.getContent(), requestDto.getTag());
+    public ServerResponse userCreateNewArticle(Article article) {
+        int result = articleMapper.insert(article);
         if (result > 0) {
             return ServerResponse.createBySuccessMessage("create new article success");
         }
         return ServerResponse.createByErrorMessage("create new article fail!!!");
     }
 
-    public ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto,Integer articleId) {
-//        int result = articleMapper.updateByPrimaryKeySelective(article);
-//        if (result > 0) {
-//            if (articleMapper.updateUserUpdateArticleTime(article.getId()) > 0) {
-//                return ServerResponse.createBySuccessMessage("update article success");
-//            }
-//            return ServerResponse.createByErrorMessage("some error in update UPDATE_TIME");
-//        }
-//        return ServerResponse.createByErrorMessage("update article fail!!!");
-        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(),requestDto.getUserId(),articleId);
-        if (result > 0) {
-            return ServerResponse.createBySuccessMessage("update success");
+    public ServerResponse userUpdateArticle(Article article) {
+        int checkResult = articleMapper.checkIsUser(article.getUserId(),article.getId());
+        if (checkResult > 0){
+            int result = articleMapper.updateByPrimaryKeySelective(article);
+            if (result > 0) {
+                if (articleMapper.updateUserUpdateArticleTime(article.getId()) > 0) {
+                    return ServerResponse.createBySuccessMessage("update article success");
+                }
+                return ServerResponse.createByErrorMessage("some error in update UPDATE_TIME");
+            }
+            return ServerResponse.createByErrorMessage("update article fail!!!");
         }
-        return ServerResponse.createByErrorMessage("update error");
+        return ServerResponse.createByErrorMessage("you are not author,so you can not update this articles!");
+
+//        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(),requestDto.getUserId(),articleId);
+//        if (result > 0) {
+//            return ServerResponse.createBySuccessMessage("update success");
+//        }
+//        return ServerResponse.createByErrorMessage("update error");
     }
 
     public ServerResponse deleteArticle(Integer userId, Integer articleId) {

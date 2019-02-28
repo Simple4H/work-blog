@@ -174,4 +174,10 @@
     <update id="updateArticle" parameterType="map">
         update xj_article set title=#{title} ,content=#{content} ,tags=#{tags} where user_id=#{userId} and id=#{articleId}
     </update>
+
+    <select id="checkIsUser" parameterType="int" resultType="int">
+        select count(1)
+        from xj_article
+        where user_id=#{userId} and id=#{articleId}
+    </select>
 </mapper>

@@ -1,8 +1,6 @@
 package com.simple.service;
 
 import com.simple.common.ServerResponse;
-import com.simple.dto.ArticleDto.CreateArticleRequestDto;
-import com.simple.dto.ArticleDto.UpdateArticleRequestDto;
 import com.simple.pojo.Article;
 
 /**
@@ -17,9 +15,9 @@ public interface IArticleService {
 
     ServerResponse searchByKeyWord(String keyWord, int pageNum, int pageSize);
 
-    ServerResponse userCreateNewArticle(CreateArticleRequestDto requestDto);
+    ServerResponse userCreateNewArticle(Article article);
 
-    ServerResponse userUpdateArticle(UpdateArticleRequestDto requestDto, Integer articleId);
+    ServerResponse userUpdateArticle(Article article);
 
     ServerResponse deleteArticle(Integer userId, Integer articleId);
 

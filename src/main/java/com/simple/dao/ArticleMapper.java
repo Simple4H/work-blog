@@ -35,4 +35,6 @@ public interface ArticleMapper {
     int insertNewArticle(@Param("userId") Integer userId, @Param("title") String title, @Param("content") String content, @Param("tags") String tags);
 
     int updateArticle(@Param("title") String title, @Param("content") String content, @Param("tags") String tags, @Param("userId") Integer userId, @Param("articleId") Integer articleId);
+
+    int checkIsUser(@Param("userId")Integer userId,@Param("articleId")Integer articleId);
 }

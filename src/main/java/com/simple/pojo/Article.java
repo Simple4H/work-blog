@@ -30,6 +30,21 @@ public class Article {
         this.updateTime = updateTime;
     }
 
+    public Article(Integer userId, String title, String content, String tags) {
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.tags = tags;
+    }
+
+    public Article(Integer id, Integer userId, String title, String content, String tags) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.tags = tags;
+    }
+
     public Article() {
         super();
     }

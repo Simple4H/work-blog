@@ -4,7 +4,6 @@ import com.simple.common.Const;
 import com.simple.common.ServerResponse;
 import com.simple.dto.UserDto.CreateUserRequestDto;
 import com.simple.pojo.User;
-import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,14 +38,14 @@ public class UserController {
 
     // 获取用户信息
     @ApiOperation(value = "获取用户信息", httpMethod = "GET")
-    @GetMapping(value = "/{id}")
-    public ServerResponse getUserInfo(HttpSession session, @PathVariable Integer id) {
+    @GetMapping(value = "")
+    public ServerResponse getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
         if (user != null) {
-            if (id.equals(user.getId())) {
+//            if (id.equals(user.getId())) {
                 return ServerResponse.createBySuccess("get user info success!", user);
-            }
-            return ServerResponse.createByErrorMessage("用户信息不匹配");
+//            }
+//            return ServerResponse.createByErrorMessage("用户信息不匹配");
         }
         return ServerResponse.createErrorByNeedLogin();
     }
@@ -56,29 +55,16 @@ public class UserController {
     @PutMapping(value = "/{id}")
     public ServerResponse updateUserInfo(@RequestBody CreateUserRequestDto requestDto,
                                          HttpSession session, @PathVariable Integer id) {
-//        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
-//        if (sessionUser == null) {
-//            return ServerResponse.createErrorByNeedLogin();
-//        }
-//        User user = new User();
-//        user.setId(sessionUser.getId());
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        user.setEmail(email);
-//        ServerResponse response = iUserService.updateUserInfo(user);
-//        if (response.isSuccess()) {
-//            session.setAttribute(Const.ROLE.CURRENT_USER, response.getData());
-//            return response;
-//        }
-//        return response;
+        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
+        if (sessionUser == null) {
+            return ServerResponse.createErrorByNeedLogin();
+        }
         return iUserService.updateUserInfo(requestDto,id);
     }
 
-
-
     // 用户获取自己点赞的文章列表
     @ApiOperation(value = "用户获取自己点赞的文章列表",httpMethod = "GET")
-    @GetMapping(value = "/likeList")
+    @GetMapping(value = "/myLikes")
     public ServerResponse getUserMyLike(HttpSession session,
                                         @ApiParam(name = "pageNum", value = "页码", required = true) @RequestParam int pageNum,
                                         @ApiParam(name = "pageSize", value = "页数", required = true) @RequestParam int pageSize) {

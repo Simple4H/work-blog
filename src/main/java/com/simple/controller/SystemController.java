@@ -30,7 +30,7 @@ public class SystemController {
 
     // 用户登录
     @ApiOperation(value = "用户登录", httpMethod = "POST")
-    @PostMapping(value = "")
+    @PostMapping(value = "/login")
     public ServerResponse login(@ApiParam(name = "username", value = "用户名", required = true) @RequestParam String username,
                                 @ApiParam(name = "password", value = "密码", required = true) @RequestParam String password,
                                 HttpSession session) {
@@ -44,7 +44,7 @@ public class SystemController {
 
     // 用户退出登录
     @ApiOperation(value = "用户退出登录", httpMethod = "POST")
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/logout/{id}")
     public ServerResponse logout(HttpSession session, @PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
         if (sessionUser == null) {

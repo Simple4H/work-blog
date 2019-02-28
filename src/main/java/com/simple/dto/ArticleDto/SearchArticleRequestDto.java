@@ -19,10 +19,8 @@ public class SearchArticleRequestDto {
     private String input;
 
     @ApiModelProperty(value = "页码")
-    private Integer pageNum;
+    private int pageNum;
 
     @ApiModelProperty(value = "页数")
-    private Integer pageSize;
-
-
+    private int pageSize;
 }
