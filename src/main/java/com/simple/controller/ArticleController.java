@@ -137,8 +137,8 @@ public class ArticleController {
 
     //    ----------------------------------------------------------------------------------------
 // 点赞博客
-    @ApiOperation(value = "点赞博客", httpMethod = "GET")
-    @GetMapping(value = "/{articleId}/like")
+    @ApiOperation(value = "点赞博客", httpMethod = "POST")
+    @PostMapping(value = "/{articleId}/like")
     public ServerResponse userLikeIt(HttpSession session,
                                      @PathVariable Integer articleId) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
@@ -152,8 +152,8 @@ public class ArticleController {
     }
 
     // 取消点赞博客
-    @ApiOperation(value = "取消点赞博客", httpMethod = "GET")
-    @GetMapping(value = "/{articleId}/unlike")
+    @ApiOperation(value = "取消点赞博客", httpMethod = "POST")
+    @PostMapping(value = "/{articleId}/unlike")
     public ServerResponse userUnLikeIt(HttpSession session,
                                        @PathVariable Integer articleId) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
