@@ -76,12 +76,6 @@ public class ArticleServiceImpl implements IArticleService {
             return ServerResponse.createByErrorMessage("update article fail!!!");
         }
         return ServerResponse.createByErrorMessage("you are not author,so you can not update this articles!");
-
-//        int result = articleMapper.updateArticle(requestDto.getTitle(), requestDto.getContent(), requestDto.getTags(),requestDto.getUserId(),articleId);
-//        if (result > 0) {
-//            return ServerResponse.createBySuccessMessage("update success");
-//        }
-//        return ServerResponse.createByErrorMessage("update error");
     }
 
     public ServerResponse deleteArticle(Integer userId, Integer articleId) {

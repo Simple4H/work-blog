@@ -44,16 +44,14 @@ public class SystemController {
 
     // 用户退出登录
     @ApiOperation(value = "用户退出登录", httpMethod = "POST")
-    @PostMapping(value = "/logout/{id}")
-    public ServerResponse logout(HttpSession session, @PathVariable Integer id) {
+    @PostMapping(value = "/logout")
+    public ServerResponse logout(HttpSession session) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
         if (sessionUser == null) {
             return ServerResponse.createErrorByNeedLogin();
         }
-        if (sessionUser.getId().equals(id)) {
-            session.removeAttribute(Const.ROLE.CURRENT_USER);
-            return ServerResponse.createBySuccessMessage("logout success");
-        }
-        return ServerResponse.createByErrorMessage("不是相同用户，无法操作");
+        session.removeAttribute(Const.ROLE.CURRENT_USER);
+        return ServerResponse.createBySuccessMessage("logout success");
     }
+
 }

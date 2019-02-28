@@ -6,7 +6,6 @@ import com.simple.dao.ArticleMapper;
 import com.simple.dao.UserItemMapper;
 import com.simple.dao.UserMapper;
 import com.simple.dto.UserDto.CreateUserRequestDto;
-import com.simple.dto.UserDto.UpdateUserRequestDto;
 import com.simple.pojo.User;
 import com.simple.pojo.UserItem;
 import com.simple.service.IUserService;
@@ -60,14 +59,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     public ServerResponse updateUserInfo(CreateUserRequestDto requestDto, Integer userId) {
-//        int result = userMapper.updateByPrimaryKeySelective(user);
-//        if (result > 0) {
-//            if (userMapper.updateUserUpdateTime(user.getId()) > 0) {
-//                return ServerResponse.createBySuccessMessage("update user info success");
-//            }
-//            return ServerResponse.createByErrorMessage("some thing error in update user update time!");
-//        }
-//        return ServerResponse.createByErrorMessage("update user info error");
         int result = userMapper.updateUserInfo(userId, requestDto.getUsername(), requestDto.getPassword(), requestDto.getEmail());
         if (result > 0) {
             return ServerResponse.createBySuccessMessage("update success");
@@ -75,8 +66,22 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("update error!!!!!");
     }
 
-    // TODO: 2019-02-26 判断博客是否存在 
     public ServerResponse userLikeIt(UserItem userItem) {
+        // 判断是否已经点赞过该博客
+        Integer checkResult = userItemMapper.checkUserIsLikeItBefore(userItem.getUserId(), userItem.getArticleId());
+        if (checkResult == null) {
+            if (userItemMapper.insert(userItem) > 0) {
+                //点赞数+1
+                articleMapper.iLikeIt(userItem.getArticleId());
+                return ServerResponse.createBySuccessMessage("you like it success");
+            }
+            return ServerResponse.createByErrorMessage("some thing error!!!!");
+        }
+        return ServerResponse.createByErrorMessage("you are like it!");
+
+    }
+
+    public ServerResponse userUnLikeIt(UserItem userItem) {
         // 判断是否已经点赞过该博客
         Integer checkResult = userItemMapper.checkUserIsLikeItBefore(userItem.getUserId(), userItem.getArticleId());
         if (checkResult != null) {
@@ -89,13 +94,14 @@ public class UserServiceImpl implements IUserService {
             }
             return ServerResponse.createByErrorMessage("have a error!!!!");
         }
-        // 没有点赞过
-        if (userItemMapper.insert(userItem) > 0) {
-            //点赞数+1
-            articleMapper.iLikeIt(userItem.getArticleId());
-            return ServerResponse.createBySuccessMessage("you like it success");
-        }
-        return ServerResponse.createByErrorMessage("some thing error!!!!");
+        return ServerResponse.createByErrorMessage("you are don't like it!!!");
+//        // 没有点赞过
+//        if (userItemMapper.insert(userItem) > 0) {
+//            //点赞数+1
+//            articleMapper.iLikeIt(userItem.getArticleId());
+//            return ServerResponse.createBySuccessMessage("you like it success");
+//        }
+//        return ServerResponse.createByErrorMessage("some thing error!!!!");
     }
 
     public ServerResponse getUserMyLike(Integer userId, int pageNum, int pageSize) {

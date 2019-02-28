@@ -3,7 +3,6 @@ package com.simple.controller;
 import com.simple.common.Const;
 import com.simple.common.ServerResponse;
 import com.simple.dto.ArticleDto.CreateArticleRequestDto;
-import com.simple.dto.ArticleDto.SearchArticleRequestDto;
 import com.simple.dto.ArticleDto.UpdateArticleRequestDto;
 import com.simple.pojo.Article;
 import com.simple.pojo.Comment;
@@ -150,6 +149,21 @@ public class ArticleController {
         userItem.setUserId(sessionUser.getId());
         userItem.setArticleId(articleId);
         return iUserService.userLikeIt(userItem);
+    }
+
+    // 取消点赞博客
+    @ApiOperation(value = "取消点赞博客", httpMethod = "GET")
+    @GetMapping(value = "/{articleId}/unlike")
+    public ServerResponse userUnLikeIt(HttpSession session,
+                                       @PathVariable Integer articleId) {
+        User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
+        if (sessionUser == null) {
+            return ServerResponse.createErrorByNeedLogin();
+        }
+        UserItem userItem = new UserItem();
+        userItem.setUserId(sessionUser.getId());
+        userItem.setArticleId(articleId);
+        return iUserService.userUnLikeIt(userItem);
     }
 
 }

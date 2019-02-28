@@ -43,7 +43,7 @@ public class UserController {
         User user = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
         if (user != null) {
 //            if (id.equals(user.getId())) {
-                return ServerResponse.createBySuccess("get user info success!", user);
+            return ServerResponse.createBySuccess("get user info success!", user);
 //            }
 //            return ServerResponse.createByErrorMessage("用户信息不匹配");
         }
@@ -52,18 +52,18 @@ public class UserController {
 
     // 用户更新用户信息
     @ApiOperation(value = "用户更新用户信息", httpMethod = "PUT")
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "")
     public ServerResponse updateUserInfo(@RequestBody CreateUserRequestDto requestDto,
-                                         HttpSession session, @PathVariable Integer id) {
+                                         HttpSession session) {
         User sessionUser = (User) session.getAttribute(Const.ROLE.CURRENT_USER);
         if (sessionUser == null) {
             return ServerResponse.createErrorByNeedLogin();
         }
-        return iUserService.updateUserInfo(requestDto,id);
+        return iUserService.updateUserInfo(requestDto, sessionUser.getId());
     }
 
     // 用户获取自己点赞的文章列表
-    @ApiOperation(value = "用户获取自己点赞的文章列表",httpMethod = "GET")
+    @ApiOperation(value = "用户获取自己点赞的文章列表", httpMethod = "GET")
     @GetMapping(value = "/myLikes")
     public ServerResponse getUserMyLike(HttpSession session,
                                         @ApiParam(name = "pageNum", value = "页码", required = true) @RequestParam int pageNum,

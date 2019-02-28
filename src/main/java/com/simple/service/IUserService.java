@@ -3,7 +3,6 @@ package com.simple.service;
 
 import com.simple.common.ServerResponse;
 import com.simple.dto.UserDto.CreateUserRequestDto;
-import com.simple.dto.UserDto.UpdateUserRequestDto;
 import com.simple.pojo.UserItem;
 
 /**
@@ -21,4 +20,6 @@ public interface IUserService {
     ServerResponse userLikeIt(UserItem userItem);
 
     ServerResponse getUserMyLike(Integer userId, int pageNum, int pageSize);
+
+    ServerResponse userUnLikeIt(UserItem userItem);
 }
