@@ -89,7 +89,7 @@ public class UserServiceImpl implements IUserService {
             int result = userItemMapper.deleteByUserIdAndArticleId(userItem.getUserId(), userItem.getArticleId());
             if (result > 0) {
                 // 博客点赞数-1
-                articleMapper.idontLikeIt(userItem.getArticleId());
+                articleMapper.iDontLikeIt(userItem.getArticleId());
                 return ServerResponse.createBySuccessMessage("unlike success");
             }
             return ServerResponse.createByErrorMessage("have a error!!!!");

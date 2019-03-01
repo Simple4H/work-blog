@@ -158,7 +158,7 @@
         update xj_article set like_article = like_article + 1 where id = #{articleId}
     </update>
 
-    <update id="idontLikeIt" parameterType="int">
+    <update id="iDontLikeIt" parameterType="int">
         update xj_article set like_article = like_article - 1 where id = #{articleId}
     </update>
 

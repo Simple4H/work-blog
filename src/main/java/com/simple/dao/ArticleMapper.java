@@ -28,7 +28,7 @@ public interface ArticleMapper {
 
     int iLikeIt(Integer articleId);
 
-    int idontLikeIt(Integer articleId);
+    int iDontLikeIt(Integer articleId);
 
     int deleteArticleByUserIdAndId(@Param("userId") Integer userId, @Param("articleId") Integer articleId);
 
